@@ -1,0 +1,42 @@
+<div class="results-container">
+
+  @if (!rawResult) {
+    <div class="no-results">
+      <h2>No results found</h2>
+      <p>Please fill the eligibility form first</p>
+      <button mat-raised-button color="primary" (click)="goBack()">
+        ← Go Back
+      </button>
+    </div>
+  } @else {
+    <div class="results-header">
+      <h2>🎯 Your Eligible Schemes</h2>
+      @if (profile) {
+        <p>Results for: <strong>{{ profile.gender }}, Age {{ profile.age }},
+          {{ profile.category }}, {{ profile.state }}</strong></p>
+      }
+      <div class="header-actions">
+        <button mat-stroked-button (click)="goBack()">← Check Again</button>
+        <button mat-stroked-button (click)="goHome()">🏠 Home</button>
+      </div>
+    </div>
+
+    <mat-card class="schemes-card">
+      <mat-card-content>
+        <markdown [data]="rawResult.schemes"></markdown>
+      </mat-card-content>
+    </mat-card>
+<div class="checklist-section">
+  <h3>📋 Get Application Checklist</h3>
+  <p>Click below for step-by-step guidance:</p>
+  <div class="scheme-buttons">
+    @for (scheme of dynamicSchemes; track scheme) {
+      <button mat-raised-button color="primary"
+        (click)="getChecklist(scheme)">
+        {{ scheme }}
+      </button>
+    }
+  </div>
+</div>
+  }
+</div>

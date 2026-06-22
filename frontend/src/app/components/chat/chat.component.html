@@ -1,0 +1,54 @@
+=<div class="chat-container">
+  <div class="chat-header">
+    <span>💬 Benefits AI Assistant</span>
+    <small>Powered by NVIDIA Nemotron</small>
+  </div>
+
+  <div class="quick-questions">
+    <span>Quick questions:</span>
+    @for (q of quickQuestions; track q) {
+      <button mat-stroked-button (click)="askQuick(q)">{{ q }}</button>
+    }
+  </div>
+
+  <div class="messages-area">
+    @for (msg of messages; track msg.time) {
+      <div class="message" [class.user]="msg.role === 'user'" [class.bot]="msg.role === 'bot'">
+        <div class="bubble">
+
+          @if (msg.role === 'bot') {
+            <markdown [data]="msg.text"></markdown>
+          } @else {
+            <p>{{ msg.text }}</p>
+          }
+
+          <small>{{ msg.time | date:'shortTime' }}</small>
+        </div>
+      </div>
+    }
+
+    @if (isLoading) {
+      <div class="message bot">
+        <div class="bubble loading">
+          <mat-spinner diameter="20"></mat-spinner>
+          <span>Thinking...</span>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="input-area">
+    <mat-form-field appearance="outline" style="flex:1">
+      <input matInput
+        [(ngModel)]="userInput"
+        (keydown)="onEnter($event)"
+        placeholder="Ask about any government scheme..."
+        [disabled]="isLoading" />
+    </mat-form-field>
+    <button mat-fab color="primary"
+      (click)="sendMessage()"
+      [disabled]="isLoading || !userInput.trim()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+</div>

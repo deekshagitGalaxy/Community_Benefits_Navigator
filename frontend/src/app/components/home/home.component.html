@@ -1,0 +1,35 @@
+<div class="hero">
+  <div class="hero-content">
+    <h1>Finding Benefits You Deserve</h1>
+    <p>Helping every Indian access government schemes, scholarships, health benefits and more — in simple language.</p>
+    <div class="hero-buttons">
+      <button mat-raised-button color="primary" (click)="goToEligibility()">
+        📋 Check My Eligibility
+      </button>
+      <button mat-stroked-button (click)="goToChat()">
+        💬 Ask AI Assistant
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="schemes-section">
+  <h2>Popular Government Schemes</h2>
+  <div class="schemes-grid">
+    @for (scheme of schemes; track scheme.name) {
+      <mat-card class="scheme-card" (click)="openScheme(scheme.url)" role="link" [attr.aria-label]="'Open ' + scheme.name">
+        <mat-card-content>
+          <div class="scheme-icon">{{ scheme.icon }}</div>
+          <h3>{{ scheme.name }}</h3>
+          <p>{{ scheme.desc }}</p>
+          <span class="visit-link">Visit Portal →</span>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+</div>
+
+<div class="helpline-banner">
+  <mat-icon>phone</mat-icon>
+  <span>Emergency Helplines: Food — 1961 | Health — 104 | Women — 181 | Scholarship — 0120-478-8249</span>
+</div>

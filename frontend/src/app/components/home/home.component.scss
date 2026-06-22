@@ -1,0 +1,118 @@
+.hero {
+ background: linear-gradient(135deg, #E65100 0%, #FF9933 50%, #138808 100%);
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 32px;
+    opacity: 0.9;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    button {
+      padding: 12px 28px;
+      font-size: 1rem;
+
+      &[mat-stroked-button] {
+        color: white;
+        border-color: white;
+      }
+    }
+  }
+}
+
+.schemes-section {
+  padding: 40px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+    color: #E65100;
+  }
+
+  .schemes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .scheme-card {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .scheme-icon {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+
+    h3 {
+      color: #E65100;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: #666;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.helpline-banner {
+  background: #fff3e0;
+  border-top: 3px solid #ff9800;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: #e65100;
+
+  mat-icon {
+    color: #ff9800;
+  }
+}
+.scheme-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+
+    .visit-link {
+      color: var(--primary-color, #1976d2);
+      text-decoration: underline;
+    }
+  }
+}
+
+.visit-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}

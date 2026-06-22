@@ -1,0 +1,131 @@
+<div class="wizard-container">
+  <div class="wizard-header">
+    <h2>📋 Check Your Eligibility</h2>
+    <p>Fill in your details to find all schemes you qualify for</p>
+  </div>
+
+  <mat-stepper linear #stepper orientation="horizontal">
+
+    <!-- STEP 1: Personal Info -->
+    <mat-step label="Personal Info">
+      <div class="step-content">
+        <h3>Tell us about yourself</h3>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Age</mat-label>
+            <input matInput type="number" [(ngModel)]="profile.age" placeholder="Enter your age" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Gender</mat-label>
+            <mat-select [(ngModel)]="profile.gender">
+              @for (g of genders; track g) {
+                <mat-option [value]="g">{{ g }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>State</mat-label>
+            <mat-select [(ngModel)]="profile.state">
+              @for (s of states; track s) {
+                <mat-option [value]="s">{{ s }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Family Size</mat-label>
+            <input matInput type="number" [(ngModel)]="profile.familySize" />
+          </mat-form-field>
+        </div>
+
+        <div class="step-actions">
+          <button mat-raised-button color="primary" matStepperNext
+            [disabled]="!profile.age || !profile.gender">
+            Next →
+          </button>
+        </div>
+      </div>
+    </mat-step>
+
+    <!-- STEP 2: Income & Category -->
+    <mat-step label="Income & Category">
+      <div class="step-content">
+        <h3>Income & Background</h3>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Annual Income (₹)</mat-label>
+            <input matInput type="number" [(ngModel)]="profile.annualIncome"
+              placeholder="e.g. 150000" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select [(ngModel)]="profile.category">
+              @for (c of categories; track c) {
+                <mat-option [value]="c">{{ c }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" style="width:100%">
+          <mat-label>Employment Status</mat-label>
+          <mat-select [(ngModel)]="profile.employmentStatus">
+            @for (e of employmentStatuses; track e) {
+              <mat-option [value]="e">{{ e }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <div class="step-actions">
+          <button mat-button matStepperPrevious>← Back</button>
+          <button mat-raised-button color="primary" matStepperNext
+            [disabled]="!profile.annualIncome || !profile.category">
+            Next →
+          </button>
+        </div>
+      </div>
+    </mat-step>
+
+    <!-- STEP 3: Special Conditions -->
+    <mat-step label="Special Conditions">
+      <div class="step-content">
+        <h3>Any special conditions?</h3>
+        <p style="color:#666">This helps us find more targeted schemes for you</p>
+
+        <div class="checkbox-group">
+          <mat-checkbox [(ngModel)]="profile.isStudent" color="primary">
+            📚 I am a Student
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="profile.isFarmer" color="primary">
+            🌾 I am a Farmer
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="profile.hasDisability" color="primary">
+            ♿ I have a Disability
+          </mat-checkbox>
+        </div>
+
+        <div class="step-actions">
+          <button mat-button matStepperPrevious>← Back</button>
+          <button mat-raised-button color="accent"
+            (click)="checkEligibility()"
+            [disabled]="isLoading">
+            @if (isLoading) {
+              <mat-spinner diameter="20"></mat-spinner>
+              Checking...
+            } @else {
+              🔍 Find My Schemes
+            }
+          </button>
+        </div>
+      </div>
+    </mat-step>
+
+  </mat-stepper>
+</div>

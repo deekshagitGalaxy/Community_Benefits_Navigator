@@ -1,0 +1,92 @@
+<div class="checklist-container">
+
+  @if (isLoading) {
+    <div class="loading-screen">
+      <mat-spinner diameter="60"></mat-spinner>
+      <h3>Generating your checklist...</h3>
+      <p>NVIDIA Nemotron is preparing your personalized guide</p>
+    </div>
+  } @else if (result) {
+
+    <div class="checklist-header">
+      <h2>📋 {{ schemeName }}</h2>
+      <p>Your personalized application checklist</p>
+      <div class="header-actions">
+        <button mat-stroked-button (click)="goBack()">← Back to Results</button>
+        <button mat-stroked-button (click)="goHome()">🏠 Home</button>
+      </div>
+    </div>
+
+    <!-- Documents Section -->
+    <mat-card class="section-card">
+      <mat-card-header>
+        <mat-card-title>📄 Documents Needed</mat-card-title>
+        <mat-card-subtitle>
+          {{ docsCompleted }} / {{ documents.length }} collected
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-progress-bar mode="determinate" [value]="docsProgress" color="primary">
+        </mat-progress-bar>
+        <div class="checklist-items">
+          @for (doc of documents; track doc.text) {
+            <mat-checkbox [(ngModel)]="doc.done" color="primary">
+              <span [class.done]="doc.done">{{ doc.text }}</span>
+            </mat-checkbox>
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Steps Section -->
+    <mat-card class="section-card">
+      <mat-card-header>
+        <mat-card-title>🪜 Application Steps</mat-card-title>
+        <mat-card-subtitle>
+          {{ stepsCompleted }} / {{ steps.length }} completed
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-progress-bar mode="determinate" [value]="stepsProgress" color="accent">
+        </mat-progress-bar>
+        <div class="checklist-items steps-list">
+          @for (step of steps; track step.text; let i = $index) {
+            <div class="step-item" [class.done]="step.done">
+              <mat-checkbox [(ngModel)]="step.done" color="accent">
+                <span class="step-number">{{ i + 1 }}</span>
+                <span [class.done]="step.done">{{ step.text }}</span>
+              </mat-checkbox>
+            </div>
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Helpline -->
+    @if (result.helpline) {
+      <div class="helpline-card">
+        <mat-icon>phone</mat-icon>
+        <div>
+          <strong>Helpline</strong>
+          <p>{{ result.helpline }}</p>
+        </div>
+      </div>
+    }
+
+    @if (result.estimatedTime) {
+      <div class="time-card">
+        <mat-icon>schedule</mat-icon>
+        <div>
+          <strong>Estimated Time</strong>
+          <p>{{ result.estimatedTime }}</p>
+        </div>
+      </div>
+    }
+
+  } @else {
+    <div class="no-results">
+      <h2>No checklist found</h2>
+      <button mat-raised-button color="primary" (click)="goBack()">← Go Back</button>
+    </div>
+  }
+</div>
