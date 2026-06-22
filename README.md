@@ -1,4 +1,4 @@
-# Hi, I'm Deeksha 👋
+# Hi, I'm Deeksha
 
 Full-Stack Developer building practical, real-world applications.
 
